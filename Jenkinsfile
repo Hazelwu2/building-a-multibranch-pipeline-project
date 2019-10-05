@@ -19,5 +19,12 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        stage('Deliver') { 
+            steps {
+                sh './jenkins/scripts/deliver-for-development.sh' 
+                input message: '完成網站了嗎？Finished using the web site? (Click "Proceed" to continue)' 
+                sh './jenkins/scripts/kill.sh' 
+            }
+        }
     }
 }
